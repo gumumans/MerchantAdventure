@@ -2,6 +2,8 @@ package entity;
 
 import qualityProducts.Qualities;
 
+import static utilities.Colors.RST;
+import static utilities.Colors.YELLOW;
 import static utilities.Rnd.rnd;
 
 public class Product {
@@ -53,6 +55,8 @@ public class Product {
     }
     @Override
     public String toString() {
-        return String.format("%s | Вес: %d | К-во: %s | Купили за: %.2f | Продадим за: %.2f", type, weight, quality.getName(), purchasePrice, sellingPrice);
+        return String.format(
+                "%s%-18s | Вес: %-4d| Качество: %-27s | Закуп цена: %.2f, Цена прод: %.2f%s",YELLOW,
+                type, weight, quality.getName(), purchasePrice, sellingPrice, RST);
     }
 }
