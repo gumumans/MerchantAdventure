@@ -1,6 +1,5 @@
 package entity;
 
-import exceptions.SellerException;
 import qualityProducts.Qualities;
 
 import static utilities.Rnd.rnd;
@@ -18,6 +17,7 @@ public class Product {
         this.weigth = rnd(5) + 6;
         this.purchasePrice = rnd(14) + 8;
         this.quality = Qualities.NORMAL;
+        setSellingPrice();
     }
 
     public void setQuality(Qualities quality) {
@@ -27,8 +27,11 @@ public class Product {
 
     public void decreaseQuality() {
         quality.decreaseQuality(this);
+        setSellingPrice();
     }
-
+    private void setSellingPrice() {
+        sellingPrice = purchasePrice * quality.getRatio();
+    }
     @Override
     public String toString() {
         return String.format("%s | Вес: %d | К-во: %s | Купили за: %.2f | Продадим за: %.2f", type, weigth, quality.getName(), purchasePrice, sellingPrice);
