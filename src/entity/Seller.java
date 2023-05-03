@@ -22,8 +22,6 @@ public class Seller {
         this.distanceToCity = distanceToCity;
     }
 
-// TODO: 03.05.2023 добавить реализацию перемещения торговца, его покупка товаров, продажа
-
     public void moveToCity() {
         distanceToCity = distanceToCity - speed;
     }
@@ -33,7 +31,7 @@ public class Seller {
         distanceToCity = distanceToCity - value - speed;
     }
 
-    public void сhangeSpeed(int value) {
+    public void changeSpeed(int value) {
         final int maxSpeed = 5;
         final int minSpeed = 1;
         this.speed = Math.max(Math.min(this.speed + value, maxSpeed), minSpeed);
