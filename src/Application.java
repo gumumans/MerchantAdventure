@@ -51,7 +51,8 @@ public class Application implements Runnable {
     private void calculateTotals() {
         double totalSelling;
         totalSelling = seller.getCart().stream().mapToDouble(Product::getSellingPrice).sum();
-
+        seller.printCart();
+        System.out.println();
         String message;
         if (totalPurchase > totalSelling)
             message = String.format("%sПоездка выдалась неудачной%nТорговец в минусе на %.2f%s", RED_BOLD, (totalPurchase - totalSelling), RST);
