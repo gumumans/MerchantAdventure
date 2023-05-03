@@ -50,6 +50,12 @@ public class Seller {
         this.cartCapacity = cart.stream().mapToInt(Product::getWeight).sum();
     }
 
+    public void printCart() {
+        StringBuilder sb = new StringBuilder("Товары торговца:\n");
+        cart.forEach(p -> sb.append((String.format("%s%s%s%n", YELLOW, p.toString(), RST))));
+        System.out.println(sb);
+    }
+
     public void moveToCity() {
         distanceToCity = Math.max((distanceToCity - speed), 0);
     }

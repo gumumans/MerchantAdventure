@@ -34,6 +34,7 @@ public class RobbersEvent extends Event {
 
             seller.getCart().removeAll(robbersProducts);
             seller.calculateCapacityCart();
+            seller.printCart();
         }
         seller.moveToCity();
     }

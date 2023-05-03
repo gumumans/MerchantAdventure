@@ -19,6 +19,7 @@ public class RainyDayEvent extends Event {
             int rndNum = rnd(seller.getCart().size());
             Product pr = seller.getCart().get(rndNum);
             pr.decreaseQuality();
+            seller.printCart();
         }
         seller.moveToCity();
     }

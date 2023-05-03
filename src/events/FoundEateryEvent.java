@@ -44,6 +44,7 @@ public class FoundEateryEvent extends Event {
                     .collect(Collectors.toList())
                     .forEach(seller::selling);
         }
+        seller.printCart();
         seller.moveToCity();
     }
 }
