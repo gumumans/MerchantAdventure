@@ -2,6 +2,8 @@ package events;
 
 import entity.Seller;
 
+import static utilities.Colors.*;
+
 public abstract class Event {
     private final String name;
     private final boolean isLucky;
@@ -15,6 +17,6 @@ public abstract class Event {
 
     @Override
     public String toString() {
-        return String.format("Событие: %s", name);
+        return String.format("%sСобытие: %-15s%n%s", this.isLucky ? BLUE : RED, name, RST);
     }
 }
