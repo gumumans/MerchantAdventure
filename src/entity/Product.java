@@ -6,7 +6,7 @@ import static utilities.Rnd.rnd;
 
 public class Product {
     private final String type;
-    private final int weigh;
+    private final int weight;
     private final double purchasePrice;
     private double sellingPrice;
     private Qualities quality;
@@ -14,7 +14,7 @@ public class Product {
     public Product() {
         String[] typesProduct = {"мясо", "сухофрукты", "зерно", "мука", "ткани", "краска"};
         this.type = typesProduct[rnd(typesProduct.length)];
-        this.weigh = rnd(5) + 6;
+        this.weight = rnd(5) + 6;
         this.purchasePrice = rnd(14) + 8;
         this.quality = Qualities.NORMAL;
     }
@@ -32,8 +32,8 @@ public class Product {
         return quality;
     }
 
-    public int getWeigh() {
-        return weigh;
+    public int getWeight() {
+        return weight;
     }
 
     public double getPurchasePrice() {
@@ -44,8 +44,10 @@ public class Product {
         return sellingPrice;
     }
 
+
+
     @Override
     public String toString() {
-        return String.format("%s | Вес: %d | К-во: %s | Купили за: %.2f | Продадим за: %.2f", type, weigh, quality.getName(), purchasePrice, sellingPrice);
+        return String.format("%s | Вес: %d | К-во: %s | Купили за: %.2f | Продадим за: %.2f", type, weight, quality.getName(), purchasePrice, sellingPrice);
     }
 }

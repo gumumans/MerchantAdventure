@@ -8,8 +8,8 @@ import static utilities.Rnd.rnd;
 public class Seller {
     private int speed;
     private double balance;
-    private int loadCapacity;
-    private List<Product> cart;
+    private final int loadCapacity;
+    private final List<Product> cart;
     private int cartCapacity;
     private int distanceToCity;
 
@@ -22,16 +22,38 @@ public class Seller {
         this.distanceToCity = distanceToCity;
     }
 
-    public void calculateCapacityCart(){
-        this.cartCapacity = cart.stream().mapToInt(Product::getWeigh).sum();
+    public void purchase(Product product) {
+        if (balance >= product.getPurchasePrice()) {
+            if (loadCapacity >= (cartCapacity + product.getWeight())) {
+                cart.add(product);
+                balance -= product.getPurchasePrice();
+                cartCapacity += product.getWeight();
+                System.out.println(product);
+            } else
+                System.out.println("У торговца не осталось места");
+        } else
+            System.out.println("У торговца закончились деньги");
+    }
+
+    public void selling(Product product) {
+        if (!cart.isEmpty()) {
+            this.balance += product.getSellingPrice();
+            this.cart.remove(product);
+            this.cartCapacity -= product.getWeight();
+            System.out.println("Продано: " + product + "\nБаланс: +$" + product.getSellingPrice());
+        } else
+            System.out.println("У торговца ничегошеньки нет :(");
+    }
+
+    public void calculateCapacityCart() {
+        this.cartCapacity = cart.stream().mapToInt(Product::getWeight).sum();
     }
 
     public void moveToCity() {
         distanceToCity = distanceToCity - speed;
     }
 
-
-    public  void moveToCity(int value){
+    public void moveToCity(int value) {
         distanceToCity = distanceToCity - value - speed;
     }
 
@@ -49,7 +71,7 @@ public class Seller {
         return speed;
     }
 
-    public void takeMoney(double value){
+    public void takeMoney(double value) {
         this.balance = (balance - value) < 0 ? 0 : balance - value;
     }
 
