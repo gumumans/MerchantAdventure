@@ -12,6 +12,9 @@ public class Application implements Runnable {
     private final Seller seller;
     private final City city;
 
+    private  double totalPurchase;
+    private  double totalSelling;
+
     public Application() {
         this.city = new City();
         this.seller = new Seller(city.getDistance());
@@ -21,6 +24,7 @@ public class Application implements Runnable {
     public void run() {
         System.out.println(city);
         purchaseOfGoods();
+        totalPurchase = seller.getCart().stream().mapToDouble(Product::getPurchasePrice).sum();
         System.out.println(seller);
         int day = 0;
         try {
@@ -37,11 +41,28 @@ public class Application implements Runnable {
                     throw new SellerException("Торговец так и не доехал на " + day + " день своего путешествия. Так как у него нет товара в телеги. И он грустный остался в пути");
                 day++;
             } while (seller.getDistanceToCity() > 0);
-        } catch (SellerException e){
+        } catch (SellerException e) {
             System.out.printf("%s%s%s%n", RED_BOLD, e.getMessage(), RST);
         }
         System.out.println(YELLOW + "Торговец прибыл в " + city.getName() + " к " + day + " дню" + RST);
+        totalSelling = seller.getCart().stream().mapToDouble(Product::getSellingPrice).sum();
 
+        System.out.println("totalPurchase = " + totalPurchase);
+        System.out.println("totalSelling = " + totalSelling);
+
+        calculateTotals();
+    }
+
+    private void calculateTotals(){
+        String message;
+        if (totalPurchase > totalSelling){
+            message = String.format("%sПоездка выдалась неудачной%nТорговец в минусе на %.2f%s",RED_BOLD, (totalPurchase - totalSelling), RST);
+        } else if (totalSelling > totalPurchase) {
+            message = String.format("%sТорговец удачно всё продал, вышел в плюс на %.2f%s", GREEN_BOLD,(totalSelling - totalPurchase),RST);
+        } else {
+            message = "Торговец продал всухую";
+        }
+        System.out.println(message);
     }
 
     private void purchaseOfGoods() {
