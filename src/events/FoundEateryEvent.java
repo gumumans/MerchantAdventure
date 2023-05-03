@@ -40,6 +40,7 @@ public class FoundEateryEvent extends Event {
 
             seller.getCart().stream()
                     .limit((rnd(3) + 1))
+                    .collect(Collectors.toList())
                     .forEach(seller::selling);
         }
         seller.moveToCity();
