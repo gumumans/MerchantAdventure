@@ -51,11 +51,11 @@ public class Seller {
     }
 
     public void moveToCity() {
-        distanceToCity = distanceToCity - speed;
+        distanceToCity = Math.max((distanceToCity - speed), 0);
     }
 
     public void moveToCity(int value) {
-        distanceToCity = distanceToCity - value - speed;
+        distanceToCity = Math.max((distanceToCity - (speed + value)), 0);
     }
 
     public void changeSpeed(int value) {
