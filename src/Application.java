@@ -5,6 +5,7 @@ import events.*;
 
 import java.util.List;
 
+import static utilities.Colors.*;
 import static utilities.Rnd.rnd;
 
 public class Application implements Runnable {
@@ -24,7 +25,7 @@ public class Application implements Runnable {
         int day = 0;
         try {
             while (true) {
-                System.out.printf("Шёл %dдень%n", day);
+                System.out.printf("%sШёл %d день%s%n", CYAN, day ,RST);
                 seller.changeSpeed(rnd(5) + 1);
                 Event event = getEvent();
                 System.out.println(event);
@@ -33,11 +34,10 @@ public class Application implements Runnable {
 
                 if (seller.getCart().isEmpty())
                     throw new SellerException("Торговец так и не доехал на " + day + " день своего путешествия. Так как у него нет товара в телеги. И он грустный остался в пути");
-
                 day++;
             }
         } catch (SellerException e){
-            System.out.println(e.getMessage());
+            System.out.printf("%s%s%s%n", RED_BOLD, e.getMessage(), RST);
         }
 
     }
