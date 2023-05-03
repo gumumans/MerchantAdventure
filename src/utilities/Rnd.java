@@ -8,7 +8,7 @@ public class Rnd {
 
     private static final Random random = new Random();
 
-    public static int nextInt(int bound) {
+    public static int rnd(int bound) {
         return random.nextInt(bound);
     }
 }
