@@ -3,6 +3,7 @@ package entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import static utilities.Colors.*;
 import static utilities.Rnd.rnd;
 
 public class Seller {
@@ -92,6 +93,7 @@ public class Seller {
 
     @Override
     public String toString() {
-        return String.format("Текущая скорость: %d | Баланс %.2f | Вес телеги: %d", speed, balance, cartCapacity);
+        return String.format("%sТекущая скорость: %d | Баланс %.2f | Вес телеги: %d" +
+                "%n%sРасстояние до города: %d%s", BLUE, speed, balance, cartCapacity, GREEN, distanceToCity, RST);
     }
 }
