@@ -2,7 +2,7 @@ package events;
 
 import entity.Seller;
 
-public class SmoothRoadEvent extends Event{
+public class SmoothRoadEvent extends Event {
     public SmoothRoadEvent() {
         super("Ровная дорога", true);
     }

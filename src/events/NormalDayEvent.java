@@ -2,7 +2,7 @@ package events;
 
 import entity.Seller;
 
-public class NormalDayEvent extends Event{
+public class NormalDayEvent extends Event {
 
     public NormalDayEvent() {
         super("Обычный день", true);

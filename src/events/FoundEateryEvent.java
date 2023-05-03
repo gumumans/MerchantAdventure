@@ -3,7 +3,6 @@ package events;
 import entity.Product;
 import entity.Seller;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 import static utilities.Rnd.rnd;

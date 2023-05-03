@@ -7,23 +7,23 @@ import static utilities.Colors.*;
 import static utilities.Rnd.rnd;
 
 public class Seller {
-        private int speed;
-        private double balance;
-        private final int loadCapacity;
-        private final List<Product> cart;
-        private int cartCapacity;
-        private int distanceToCity;
+    private int speed;
+    private double balance;
+    private final int loadCapacity;
+    private final List<Product> cart;
+    private int cartCapacity;
+    private int distanceToCity;
 
-        public Seller(int distanceToCity) {
-            this.speed = rnd(5) + 1;
-            this.balance = rnd(301) + 200d;
-            this.loadCapacity = rnd(121) + 80;
-            this.cartCapacity = 0;
-            this.cart = new ArrayList<>();
-            this.distanceToCity = distanceToCity;
-        }
+    public Seller(int distanceToCity) {
+        this.speed = rnd(5) + 1;
+        this.balance = rnd(301) + 200d;
+        this.loadCapacity = rnd(121) + 80;
+        this.cartCapacity = 0;
+        this.cart = new ArrayList<>();
+        this.distanceToCity = distanceToCity;
+    }
 
-        public void purchase(Product product) {
+    public void purchase(Product product) {
         if (balance >= product.getPurchasePrice()) {
             if (loadCapacity >= (cartCapacity + product.getWeight())) {
                 cart.add(product);
@@ -41,7 +41,7 @@ public class Seller {
             this.balance += product.getSellingPrice();
             this.cart.remove(product);
             this.cartCapacity -= product.getWeight();
-            System.out.println("Продано: " + product + "\nБаланс: +$" + product.getSellingPrice());
+            System.out.printf("%sБыл продан %-17s %s+$%-7.2f%n%sТекущий баланс: %.2f%s%n", RED, product, GREEN, product.getSellingPrice(), YELLOW, balance, RST);
         } else
             System.out.println("У торговца ничегошеньки нет :(");
     }
@@ -77,6 +77,7 @@ public class Seller {
     public int getDistanceToCity() {
         return distanceToCity;
     }
+
     public void takeMoney(double value) {
         this.balance = (balance - value) < 0 ? 0 : balance - value;
     }

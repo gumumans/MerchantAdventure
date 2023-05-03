@@ -22,6 +22,6 @@ public class City {
 
     @Override
     public String toString() {
-        return String.format("Город назначения: %s%nРасстояние до города: %d",name,distance);
+        return String.format("Город назначения: %s%nРасстояние до города: %d", name, distance);
     }
 }

@@ -2,7 +2,6 @@ package events;
 
 import entity.Product;
 import entity.Seller;
-import qualityProducts.Qualities;
 
 import java.util.Comparator;
 import java.util.List;
@@ -18,7 +17,7 @@ public class RobbersEvent extends Event {
 
     @Override
     public void doEvent(Seller seller) {
-        double robbersCoin = rnd(6) + 5;
+        double robbersCoin = rnd(6) + 5D;
 
         if (rnd(100) > 50 && seller.getBalance() > robbersCoin) {
             seller.takeMoney(robbersCoin);

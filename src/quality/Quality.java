@@ -1,4 +1,4 @@
-package qualityProducts;
+package quality;
 
 import entity.Product;
 

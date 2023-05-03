@@ -2,6 +2,7 @@ import entity.City;
 import entity.Product;
 import entity.Seller;
 import events.*;
+import exception.SellerException;
 
 import java.util.List;
 
@@ -11,9 +12,7 @@ import static utilities.Rnd.rnd;
 public class Application implements Runnable {
     private final Seller seller;
     private final City city;
-
-    private  double totalPurchase;
-    private  double totalSelling;
+    private double totalPurchase;
 
     public Application() {
         this.city = new City();
@@ -45,23 +44,20 @@ public class Application implements Runnable {
             System.out.printf("%s%s%s%n", RED_BOLD, e.getMessage(), RST);
         }
         System.out.println(YELLOW + "Торговец прибыл в " + city.getName() + " к " + day + " дню" + RST);
-        totalSelling = seller.getCart().stream().mapToDouble(Product::getSellingPrice).sum();
-
-        System.out.println("totalPurchase = " + totalPurchase);
-        System.out.println("totalSelling = " + totalSelling);
 
         calculateTotals();
     }
 
-    private void calculateTotals(){
+    private void calculateTotals() {
+        double totalSelling;
+        totalSelling = seller.getCart().stream().mapToDouble(Product::getSellingPrice).sum();
+
         String message;
-        if (totalPurchase > totalSelling){
-            message = String.format("%sПоездка выдалась неудачной%nТорговец в минусе на %.2f%s",RED_BOLD, (totalPurchase - totalSelling), RST);
-        } else if (totalSelling > totalPurchase) {
-            message = String.format("%sТорговец удачно всё продал, вышел в плюс на %.2f%s", GREEN_BOLD,(totalSelling - totalPurchase),RST);
-        } else {
-            message = "Торговец продал всухую";
-        }
+        if (totalPurchase > totalSelling)
+            message = String.format("%sПоездка выдалась неудачной%nТорговец в минусе на %.2f%s", RED_BOLD, (totalPurchase - totalSelling), RST);
+        else if (totalSelling > totalPurchase)
+            message = String.format("%sТорговец удачно всё продал, вышел в плюс на %.2f%s", GREEN_BOLD, (totalSelling - totalPurchase), RST);
+        else message = "Торговец продал всухую";
         System.out.println(message);
     }
 
@@ -76,17 +72,7 @@ public class Application implements Runnable {
     }
 
     private Event getEvent() {
-        List<Event> events = List.of(
-                new FoundEateryEvent(),
-                new MetLocalEvent(),
-                new NormalDayEvent(),
-                new RainyDayEvent(),
-                new RiverEvent(),
-                new RobbersEvent(),
-                new SmoothRoadEvent(),
-                new SpoiledEvent(),
-                new WellBrokenEvent()
-        );
+        List<Event> events = List.of(new FoundEateryEvent(), new MetLocalEvent(), new NormalDayEvent(), new RainyDayEvent(), new RiverEvent(), new RobbersEvent(), new SmoothRoadEvent(), new SpoiledEvent(), new WellBrokenEvent());
         return events.get(rnd(events.size()));
     }
 }
