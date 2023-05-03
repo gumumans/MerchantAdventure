@@ -1,13 +1,12 @@
 package entity;
 
-import exceptions.SellerException;
 import qualityProducts.Qualities;
 
 import static utilities.Rnd.rnd;
 
 public class Product {
     private final String type;
-    private final int weigth;
+    private final int weigh;
     private final double purchasePrice;
     private double sellingPrice;
     private Qualities quality;
@@ -15,7 +14,7 @@ public class Product {
     public Product() {
         String[] typesProduct = {"мясо", "сухофрукты", "зерно", "мука", "ткани", "краска"};
         this.type = typesProduct[rnd(typesProduct.length)];
-        this.weigth = rnd(5) + 6;
+        this.weigh = rnd(5) + 6;
         this.purchasePrice = rnd(14) + 8;
         this.quality = Qualities.NORMAL;
     }
@@ -29,8 +28,24 @@ public class Product {
         quality.decreaseQuality(this);
     }
 
+    public Qualities getQuality() {
+        return quality;
+    }
+
+    public int getWeigh() {
+        return weigh;
+    }
+
+    public double getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public double getSellingPrice() {
+        return sellingPrice;
+    }
+
     @Override
     public String toString() {
-        return String.format("%s | Вес: %d | К-во: %s | Купили за: %.2f | Продадим за: %.2f", type, weigth, quality.getName(), purchasePrice, sellingPrice);
+        return String.format("%s | Вес: %d | К-во: %s | Купили за: %.2f | Продадим за: %.2f", type, weigh, quality.getName(), purchasePrice, sellingPrice);
     }
 }

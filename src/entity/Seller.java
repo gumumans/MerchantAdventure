@@ -22,6 +22,10 @@ public class Seller {
         this.distanceToCity = distanceToCity;
     }
 
+    public void calculateCapacityCart(){
+        this.cartCapacity = cart.stream().mapToInt(Product::getWeigh).sum();
+    }
+
     public void moveToCity() {
         distanceToCity = distanceToCity - speed;
     }
@@ -43,6 +47,10 @@ public class Seller {
 
     public int getSpeed() {
         return speed;
+    }
+
+    public void takeMoney(double value){
+        this.balance = (balance - value) < 0 ? 0 : balance - value;
     }
 
     public double getBalance() {
