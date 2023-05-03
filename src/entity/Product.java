@@ -2,8 +2,7 @@ package entity;
 
 import qualityProducts.Qualities;
 
-import static utilities.Colors.RST;
-import static utilities.Colors.YELLOW;
+import static utilities.Colors.*;
 import static utilities.Rnd.rnd;
 
 public class Product {
@@ -24,7 +23,7 @@ public class Product {
 
     public void setQuality(Qualities quality) {
         this.quality = quality;
-        System.out.printf("Состояние продукта %s изменилось на %s%n",this.type, this.quality.getName());
+        System.out.printf(PURPLE + "Состояние продукта %s изменилось на %s%n" + RST,this.type, this.quality.getName());
     }
 
     public void decreaseQuality() {

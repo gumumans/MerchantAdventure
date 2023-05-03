@@ -25,6 +25,7 @@ public class Application implements Runnable {
         int day = 0;
         try {
             do {
+                System.out.println("=".repeat(108));
                 System.out.printf("%sШёл %d день%s%n", CYAN, day, RST);
                 seller.changeSpeed(rnd(5) + 1);
                 Event event = getEvent();

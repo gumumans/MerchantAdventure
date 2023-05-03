@@ -12,7 +12,7 @@ public class RainyDayEvent extends Event {
 
     @Override
     public void doEvent(Seller seller) {
-        System.out.println("Cнижается скорость передвижения на 2 единицы");
+        System.out.println("\tCнижается скорость передвижения на 2 единицы");
         seller.changeSpeed(-2);
         if (rnd(10) <= 2) {
             System.out.println("Случайно испортился один из товаров");

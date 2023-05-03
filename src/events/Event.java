@@ -17,6 +17,6 @@ public abstract class Event {
 
     @Override
     public String toString() {
-        return String.format("%sСобытие: %-15s%n%s", this.isLucky ? BLUE : RED, name, RST);
+        return String.format("%sСобытие: %-15s%s", this.isLucky ? BLUE : RED, name, RST);
     }
 }

@@ -10,6 +10,6 @@ public class NormalDayEvent extends Event{
 
     @Override
     public void doEvent(Seller seller) {
-        System.out.println("Ничего не произошло");
+        System.out.println("\tНичего не произошло");
     }
 }

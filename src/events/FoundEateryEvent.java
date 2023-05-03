@@ -16,7 +16,8 @@ public class FoundEateryEvent extends Event {
 
     @Override
     public void doEvent(Seller seller) {
-        double overnightMoney = rnd(8) + 8;
+        double overnightMoney = rnd(8) + 8d;
+        System.out.print("\t");
         if (rnd(100) > 50) {
             System.out.println("Торговец решил не оставаться и поэтому едет дальше");
             seller.moveToCity();
