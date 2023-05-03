@@ -67,7 +67,9 @@ public class Seller {
         this.speed = 0;
     }
 
-
+    public int getDistanceToCity() {
+        return distanceToCity;
+    }
     public void takeMoney(double value) {
         this.balance = (balance - value) < 0 ? 0 : balance - value;
     }
