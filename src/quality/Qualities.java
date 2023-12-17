@@ -48,5 +48,16 @@ public enum Qualities implements Quality {
         return ratio;
     }
 
+    public void decrease(Product product) {
+        Qualities quality = this;
+        try {
+            quality = Qualities.values()[this.ordinal() + 1];
+        } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
+            System.out.println("Качество ниже некуда");
+        }
+        product.setQuality(quality);
+        System.out.println(quality);
+    }
+
 
 }

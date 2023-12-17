@@ -54,7 +54,7 @@ public class Product {
     @Override
     public String toString() {
         return String.format(
-                "%s%-18s | Вес: %-4d| Качество: %-27s | Закуп цена: %.2f, Цена прод: %.2f%s", YELLOW,
+                "%s%-18s | Вес: %-4d| Качество: %-27s | Закуп цена: %6.2f, Цена прод: %6.2f%s", YELLOW,
                 type, weight, quality.getName(), purchasePrice, sellingPrice, RST);
     }
 }

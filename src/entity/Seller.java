@@ -7,10 +7,10 @@ import static utilities.Colors.*;
 import static utilities.Rnd.rnd;
 
 public class Seller {
-    private int speed;
-    private double balance;
     private final int loadCapacity;
     private final List<Product> cart;
+    private int speed;
+    private double balance;
     private int cartCapacity;
     private int distanceToCity;
 
@@ -47,7 +47,12 @@ public class Seller {
     }
 
     public void calculateCapacityCart() {
-        this.cartCapacity = cart.stream().mapToInt(Product::getWeight).sum();
+        int sum = 0;
+        for (Product product : cart) {
+            int weight = product.getWeight();
+            sum += weight;
+        }
+        this.cartCapacity = sum;
     }
 
     public void printCart() {

@@ -3,7 +3,8 @@ package events;
 import entity.Product;
 import entity.Seller;
 
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 import static utilities.Rnd.rnd;
 
@@ -31,6 +32,7 @@ public class FoundEateryEvent extends Event {
         System.out.println("-$" + overnightMoney);
         seller.takeMoney(overnightMoney);
 
+        /// Здесь нужна проверка есть ли место у торговца в повозке
         if (rnd(100) > 50) {
             System.out.println("Торговец решил закупиться");
             for (int i = 0; i < (rnd(4) + 1); i++)
@@ -38,10 +40,17 @@ public class FoundEateryEvent extends Event {
         } else {
             System.out.println("Торговец решил продать часть товара");
 
-            seller.getCart().stream()
-                    .limit((rnd(3) + 1))
-                    .collect(Collectors.toList())
-                    .forEach(seller::selling);
+            List<Product> products = new ArrayList<>();
+            long limit = (rnd(3) + 1);
+
+            for (Product product1 : seller.getCart()) {
+                if (limit-- == 0) break;
+                products.add(product1);
+            }
+
+            for (Product product : products) {
+                seller.selling(product);
+            }
         }
         seller.printCart();
         seller.moveToCity();

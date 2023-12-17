@@ -23,7 +23,14 @@ public class Application implements Runnable {
     public void run() {
         System.out.println(city);
         purchaseOfGoods();
-        totalPurchase = seller.getCart().stream().mapToDouble(Product::getPurchasePrice).sum();
+
+        double sum = 0.0;
+        for (Product product : seller.getCart()) {
+            double purchasePrice = product.getPurchasePrice();
+            sum += purchasePrice;
+        }
+        totalPurchase = sum;
+
         System.out.println(seller);
         int day = 0;
         try {
@@ -50,7 +57,12 @@ public class Application implements Runnable {
 
     private void calculateTotals() {
         double totalSelling;
-        totalSelling = seller.getCart().stream().mapToDouble(Product::getSellingPrice).sum();
+        double sum = 0.0;
+        for (Product product : seller.getCart()) {
+            double sellingPrice = product.getSellingPrice();
+            sum += sellingPrice;
+        }
+        totalSelling = sum;
         seller.printCart();
         System.out.println();
         String message;
