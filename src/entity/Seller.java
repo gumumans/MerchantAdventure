@@ -1,5 +1,7 @@
 package entity;
 
+import entity.product.Product;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,12 +49,7 @@ public class Seller {
     }
 
     public void calculateCapacityCart() {
-        int sum = 0;
-        for (Product product : cart) {
-            int weight = product.getWeight();
-            sum += weight;
-        }
-        this.cartCapacity = sum;
+        this.cartCapacity = cart.stream().mapToInt(Product::getWeight).sum();
     }
 
     public void printCart() {
@@ -66,7 +63,7 @@ public class Seller {
     }
 
     public void moveToCity(int value) {
-        distanceToCity = Math.max((distanceToCity - (speed + value)), 0);
+        distanceToCity = Math.max(((distanceToCity - value) - speed), 0);
     }
 
     public void changeSpeed(int value) {

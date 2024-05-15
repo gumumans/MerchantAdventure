@@ -1,6 +1,4 @@
-package quality;
-
-import entity.Product;
+package entity.product;
 
 public enum Qualities implements Quality {
     NORMAL("нормальное", 1.2) {

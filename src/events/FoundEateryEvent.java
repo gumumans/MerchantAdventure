@@ -1,10 +1,7 @@
 package events;
 
-import entity.Product;
 import entity.Seller;
-
-import java.util.ArrayList;
-import java.util.List;
+import entity.product.Product;
 
 import static utilities.Rnd.rnd;
 
@@ -17,6 +14,7 @@ public class FoundEateryEvent extends Event {
     @Override
     public void doEvent(Seller seller) {
         double overnightMoney = rnd(8) + 8d;
+
         System.out.print("\t");
         if (rnd(100) > 50) {
             System.out.println("Торговец решил не оставаться и поэтому едет дальше");
@@ -35,22 +33,16 @@ public class FoundEateryEvent extends Event {
         /// Здесь нужна проверка есть ли место у торговца в повозке
         if (rnd(100) > 50) {
             System.out.println("Торговец решил закупиться");
-            for (int i = 0; i < (rnd(4) + 1); i++)
+            int countGoods = rnd(4) + 1;
+            for (int i = 0; i < countGoods; i++)
                 seller.purchase(new Product());
         } else {
             System.out.println("Торговец решил продать часть товара");
 
-            List<Product> products = new ArrayList<>();
-            long limit = (rnd(3) + 1);
-
-            for (Product product1 : seller.getCart()) {
-                if (limit-- == 0) break;
-                products.add(product1);
-            }
-
-            for (Product product : products) {
-                seller.selling(product);
-            }
+            seller.getCart().stream()
+                    .limit((rnd(3) + 1))
+                    .toList()
+                    .forEach(seller::selling);
         }
         seller.printCart();
         seller.moveToCity();

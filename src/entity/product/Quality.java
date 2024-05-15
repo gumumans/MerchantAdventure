@@ -1,6 +1,4 @@
-package quality;
-
-import entity.Product;
+package entity.product;
 
 
 public interface Quality {

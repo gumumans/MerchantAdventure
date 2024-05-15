@@ -1,7 +1,7 @@
 package events;
 
-import entity.Product;
 import entity.Seller;
+import entity.product.Product;
 
 import static utilities.Rnd.rnd;
 

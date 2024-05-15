@@ -1,6 +1,6 @@
 import entity.City;
-import entity.Product;
 import entity.Seller;
+import entity.product.Product;
 import events.*;
 import exception.SellerException;
 
@@ -24,12 +24,7 @@ public class Application implements Runnable {
         System.out.println(city);
         purchaseOfGoods();
 
-        double sum = 0.0;
-        for (Product product : seller.getCart()) {
-            double purchasePrice = product.getPurchasePrice();
-            sum += purchasePrice;
-        }
-        totalPurchase = sum;
+        totalPurchase = seller.getCart().stream().mapToDouble(Product::getPurchasePrice).sum();
 
         System.out.println(seller);
         int day = 0;
@@ -47,22 +42,15 @@ public class Application implements Runnable {
                     throw new SellerException("Торговец так и не доехал на " + day + " день своего путешествия. Так как у него нет товара в телеги. И он грустный остался в пути");
                 day++;
             } while (seller.getDistanceToCity() > 0);
+            System.out.println(YELLOW + "Торговец прибыл в " + city.getName() + " к " + day + " дню" + RST);
+            calculateTotals();
         } catch (SellerException e) {
             System.out.printf("%s%s%s%n", RED_BOLD, e.getMessage(), RST);
         }
-        System.out.println(YELLOW + "Торговец прибыл в " + city.getName() + " к " + day + " дню" + RST);
-
-        calculateTotals();
     }
 
     private void calculateTotals() {
-        double totalSelling;
-        double sum = 0.0;
-        for (Product product : seller.getCart()) {
-            double sellingPrice = product.getSellingPrice();
-            sum += sellingPrice;
-        }
-        totalSelling = sum;
+        double totalSelling = seller.getCart().stream().mapToDouble(Product::getSellingPrice).sum();
         seller.printCart();
         System.out.println();
         String message;
@@ -85,7 +73,17 @@ public class Application implements Runnable {
     }
 
     private Event getEvent() {
-        List<Event> events = List.of(new FoundEateryEvent(), new MetLocalEvent(), new NormalDayEvent(), new RainyDayEvent(), new RiverEvent(), new RobbersEvent(), new SmoothRoadEvent(), new SpoiledEvent(), new WellBrokenEvent());
+        List<Event> events = List.of(
+                new FoundEateryEvent(),
+                new MetLocalEvent(),
+                new NormalDayEvent(),
+                new RainyDayEvent(),
+                new RiverEvent(),
+                new RobbersEvent(),
+                new SmoothRoadEvent(),
+                new SpoiledEvent(),
+                new WellBrokenEvent()
+        );
         return events.get(rnd(events.size()));
     }
 }

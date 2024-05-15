@@ -1,6 +1,4 @@
-package entity;
-
-import quality.Qualities;
+package entity.product;
 
 import static utilities.Colors.*;
 import static utilities.Rnd.rnd;
@@ -21,13 +19,13 @@ public class Product {
         setSellingPrice();
     }
 
-    public void setQuality(Qualities quality) {
+    protected void setQuality(Qualities quality) {
         this.quality = quality;
         System.out.printf(PURPLE + "Состояние продукта %s изменилось на %s%n" + RST, this.type, this.quality.getName());
     }
 
     public void decreaseQuality() {
-        quality.decreaseQuality(this);
+        quality.decrease(this);
         setSellingPrice();
     }
 
